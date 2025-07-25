@@ -1,7 +1,13 @@
 {
-  "name": "plants-view",
+  "name": "react-plants-view",
   "private": true,
   "version": "1.0.0",
+  "author": "DanielYanesDev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DanielYanesDev/react-plants-view.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -29,7 +35,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "ts-standard": "^12.0.2",
-    "typescript": "~5.8.3",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.4"
   }

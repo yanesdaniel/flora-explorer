@@ -2,6 +2,10 @@
 
 Page for viewing random plants around the world.
 
+## Preview
+
+![Preview](./docs/preview.png)
+
 ## Tech Stack
 
 - React
