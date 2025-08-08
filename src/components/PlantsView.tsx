@@ -1,6 +1,6 @@
+import { type FC } from 'react'
 import { Heading, SimpleGrid, Box, Image, Text } from '@chakra-ui/react'
 import { type Plant } from '../types'
-import { type FC } from 'react'
 
 interface Props {
   plants: Plant[]
@@ -25,8 +25,8 @@ const PlantsView: FC<Props> = ({ plants }) => {
             {(plant.default_image != null)
               ? (
                 <Image
-                  src={plant.default_image.regular_url || plant.default_image.original_url}
-                  alt={plant.common_name}
+                  src={plant.default_image.regular_url !== undefined ? plant.default_image.regular_url : plant.default_image.original_url}
+                  alt={`${plant.common_name} plant image`}
                   loading='lazy'
                   objectFit='cover'
                   h='250px'
@@ -47,21 +47,17 @@ const PlantsView: FC<Props> = ({ plants }) => {
                 )}
             <Box p={4}>
               <Heading as='h2' size='xl' mb={2} color={{ base: 'black', _dark: 'white' }}>
-                Common name: {plant.common_name || 'Common name not available'}
+                Common name: {plant.common_name !== null ? plant.common_name : 'Common name not available'}
               </Heading>
               <Text fontSize='lg' color={{ base: 'gray.700', _dark: 'gray.200' }} mb={2} fontStyle='italic'>
-                Scientific name: {plant.scientific_name?.[0] || 'Scientific name not available'}
+                Scientific name: {plant.scientific_name !== null ? plant.scientific_name?.[0] : 'Scientific name not available'}
               </Text>
-              {plant.family && (
-                <Text fontSize='lg' color={{ base: 'gray.700', _dark: 'gray.200' }} fontStyle='italic' mb={2}>
-                  Family: {plant.family || 'Family not available'}
-                </Text>
-              )}
-              {plant.genus && (
-                <Text fontSize='lg' color={{ base: 'gray.700', _dark: 'gray.200' }} fontStyle='italic'>
-                  Genus: {plant.genus || 'Genus not available'}
-                </Text>
-              )}
+              <Text fontSize='lg' color={{ base: 'gray.700', _dark: 'gray.200' }} fontStyle='italic' mb={2}>
+                Family: {plant.family !== null ? plant.family : 'Family not available'}
+              </Text>
+              <Text fontSize='lg' color={{ base: 'gray.700', _dark: 'gray.200' }} fontStyle='italic'>
+                Genus: {plant.genus !== null ? plant.genus : 'Genus not available'}
+              </Text>
             </Box>
           </Box>
         )

@@ -15,7 +15,7 @@ Page for viewing random plants around the world.
 
 ## API
 
-- The API used is the [Perenual API](https://perenual.com/).
+- The API used is the [Perenual API](https://perenual.com/), specifically the endpoint `https://perenual.com/api/v2/species-list`.
 - The API key is required to use the API.
 
 ### Environment Variables

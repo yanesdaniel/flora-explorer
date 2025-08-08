@@ -1,7 +1,8 @@
+import { type FC } from 'react'
 import { Box, Flex, Text, Link, Icon } from '@chakra-ui/react'
 import { GithubIcon } from '@components/Icons'
 
-function Footer () {
+const Footer: FC = () => {
   return (
     <Box as='footer' mt={10} py={6} borderTopWidth='1px' borderTopColor={{ base: 'gray.200', _dark: 'gray.700' }}>
       <Flex

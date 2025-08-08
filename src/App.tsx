@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { type Plant } from './types'
 import { API_URL, API_KEY } from './constants'
 import {
@@ -11,20 +11,24 @@ import PlantsView from '@components/PlantsView'
 import { getRandomPage } from '@utils/functions'
 import Layout from '@components/Layout'
 
-function App () {
+const App: FC = () => {
   const [plants, setPlants] = useState<Plant[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchPlants = async () => {
+    const fetchPlants = async (): Promise<void> => {
       try {
-        const response: Response = await fetch(`${API_URL}?key=${API_KEY}&page=${getRandomPage()}`)
+        const response: Response = await fetch(
+          `${String(API_URL)}?key=${String(API_KEY)}&page=${String(getRandomPage())}`
+        )
+
         if (!response.ok) {
-          throw new Error('Error while loading data')
+          throw new Error('Error with the API response')
         }
+
         const data: { data: Plant[] } = await response.json()
-        setPlants(data.data || [])
+        setPlants(data.data)
       } catch (err) {
         setError('Error while loading plants data')
         console.error(err)
@@ -33,10 +37,10 @@ function App () {
       }
     }
 
-    fetchPlants()
+    fetchPlants().catch(err => console.error(err))
   }, [])
 
-  if (error) {
+  if (error !== null && error !== '') {
     return (
       <Layout>
         <Alert.Root status='error' title='Error' width='sm' margin='auto' borderRadius='lg'>

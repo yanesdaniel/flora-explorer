@@ -1,8 +1,13 @@
+import { type FC } from 'react'
 import { Container, Flex, Heading, Text } from '@chakra-ui/react'
 import { ColorModeButton } from '@components/ui/color-mode'
 import Footer from '@components/Footer'
 
-function Layout ({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode
+}
+
+const Layout: FC<Props> = ({ children }) => {
   return (
     <Container maxW='container.xl' pt={8} pb={4}>
       <Flex justifyContent='space-between' alignItems='center' mb={8}>

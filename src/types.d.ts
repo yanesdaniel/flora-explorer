@@ -6,6 +6,6 @@ export interface Plant {
   genus: string | null
   default_image: {
     original_url: string
-    regular_url: string
+    regular_url: string | undefined
   } | null
 }
