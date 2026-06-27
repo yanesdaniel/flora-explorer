@@ -1,23 +1,18 @@
-import { type FC } from 'react'
 import { Box, Flex, Text, Link, Icon } from '@chakra-ui/react'
-import { GithubIcon } from '@components/Icons'
+import { GithubIcon } from '@/components/Icons'
 
-const Footer: FC = () => {
+const Footer = () => {
   return (
-    <Box as='footer' mt={10} py={6} borderTopWidth='1px' borderTopColor={{ base: 'gray.200', _dark: 'gray.700' }}>
+    <Box as='footer' mt={10} py={4} borderTopWidth='1px' borderTopColor={{ base: 'gray.300', _dark: 'gray.700' }}>
       <Flex
         direction={{ base: 'column', md: 'row' }}
         align='center'
         justify='space-between'
         maxW='container.xl'
         mx='auto'
-        px={4}
       >
-        <Text color={{ base: 'gray.600', _dark: 'gray.300' }} mb={{ base: 4, md: 0 }}>
-          © {new Date().getFullYear()} Daniel Yanes - MIT License
-        </Text>
         <Flex align='center'>
-          <Text color={{ base: 'gray.600', _dark: 'gray.300' }} mr={2}>
+          <Text color={{ base: 'gray.700', _dark: 'gray.300' }} mr={2}>
             Created by
           </Text>
           <Link
@@ -32,7 +27,7 @@ const Footer: FC = () => {
             <Icon as={GithubIcon} mr={1} />
             Daniel Yanes
           </Link>
-          <Text color={{ base: 'gray.600', _dark: 'gray.300' }} mx={2}>
+          <Text color={{ base: 'gray.700', _dark: 'gray.300' }} mx={2}>
             |
           </Text>
           <Link
@@ -45,9 +40,12 @@ const Footer: FC = () => {
             alignItems='center'
           >
             <Icon as={GithubIcon} mr={1} />
-            View on GitHub
+            GitHub
           </Link>
         </Flex>
+        <Text color={{ base: 'gray.700', _dark: 'gray.300' }} mt={{ base: 2, md: 0 }}>
+          {new Date().getFullYear()}
+        </Text>
       </Flex>
     </Box>
   )
