@@ -1,5 +1,5 @@
-import { useEffect, useState, type FC } from 'react'
-import { type Plant } from './types'
+import { useEffect, useState, useCallback } from 'react'
+import { type Plant } from './types.d'
 import { API_URL, API_KEY } from './constants'
 import {
   Box,
@@ -7,67 +7,68 @@ import {
   Skeleton,
   Alert
 } from '@chakra-ui/react'
-import PlantsView from '@components/PlantsView'
-import { getRandomPage } from '@utils/functions'
-import Layout from '@components/Layout'
+import PlantsView from '@/components/PlantsView'
+import { getRandomPage } from '@/utils/functions'
+import Layout from '@/components/Layout'
 
-const App: FC = () => {
+const App = () => {
   const [plants, setPlants] = useState<Plant[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    const fetchPlants = async (): Promise<void> => {
-      try {
-        const response: Response = await fetch(
-          `${String(API_URL)}?key=${String(API_KEY)}&page=${String(getRandomPage())}`
-        )
+  const fetchNewPlants = useCallback(async (): Promise<void> => {
+    setError(null)
+    setLoading(true)
 
-        if (!response.ok) {
-          throw new Error('Error with the API response')
-        }
+    try {
+      const response: Response = await fetch(
+        `${API_URL}?key=${API_KEY}&page=${getRandomPage()}`
+      )
 
-        const data: { data: Plant[] } = await response.json()
-        setPlants(data.data)
-      } catch (err) {
-        setError('Error while loading plants data')
-        console.error(err)
-      } finally {
-        setLoading(false)
+      if (!response.ok) {
+        throw new Error('Error with the API response')
       }
-    }
 
-    fetchPlants().catch(err => console.error(err))
+      const data: { data: Plant[] } = await response.json()
+      setPlants(data.data)
+    } catch (err) {
+      setError('Error while loading plants data')
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
   }, [])
+
+  useEffect(() => {
+    fetchNewPlants()
+  }, [fetchNewPlants])
 
   if (error !== null && error !== '') {
     return (
       <Layout>
         <Alert.Root status='error' title='Error' width='sm' margin='auto' borderRadius='lg'>
           <Alert.Indicator />
-          <Alert.Title>Error loading plants data</Alert.Title>
+          <Alert.Title>{error}</Alert.Title>
         </Alert.Root>
       </Layout>
     )
   }
 
   return (
-    <Layout>
-      {loading
-        ? (
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
-            {[...Array(6)].map((_, i) => (
-              <Box key={i} p={4} borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                <Skeleton height='200px' mb={4} />
-                <Skeleton height='20px' mb={2} />
-                <Skeleton height='16px' width='80%' />
-              </Box>
-            ))}
-          </SimpleGrid>
-          )
-        : (
-          <PlantsView plants={plants} />
-          )}
+    <Layout onLoadNewPlants={fetchNewPlants} loading={loading}>
+      {loading ? (
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
+          {[...Array(6)].map((_, i) => (
+            <Box key={i} p={4} borderWidth='1px' borderRadius='lg' overflow='hidden'>
+              <Skeleton height='200px' mb={4} />
+              <Skeleton height='20px' mb={2} />
+              <Skeleton height='16px' width='80%' />
+            </Box>
+          ))}
+        </SimpleGrid>
+      ) : (
+        <PlantsView plants={plants} />
+      )}
     </Layout>
   )
 }
