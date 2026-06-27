@@ -1,7 +1,6 @@
-import { type FC } from 'react'
-import { useColorModeValue } from '@components/ui/color-mode'
+import { useColorModeValue } from '@/components/ui/color-mode'
 
-export const GithubIcon: FC = () => {
+export const GithubIcon = () => {
   const theme = useColorModeValue('#1A202C', '#fff')
   return (
     <svg
