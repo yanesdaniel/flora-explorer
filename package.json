@@ -2,11 +2,11 @@
   "name": "flora-explorer",
   "version": "1.0.0",
   "type": "module",
-  "author": "DanielYanesDev",
+  "author": "Daniel Yanes",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DanielYanesDev/react-plants-view.git"
+    "url": "https://github.com/yanesdaniel/flora-explorer.git"
   },
   "scripts": {
     "dev": "vite",
