@@ -16,7 +16,7 @@ const Footer = () => {
             Created by
           </Text>
           <Link
-            href='https://github.com/DanielYanesDev'
+            href='https://github.com/yanesdaniel'
             target='_blank'
             rel='noopener noreferrer'
             color='teal.500'
@@ -31,7 +31,7 @@ const Footer = () => {
             |
           </Text>
           <Link
-            href='https://github.com/DanielYanesDev/react-plants-view'
+            href='https://github.com/yanesdaniel/flora-explorer'
             target='_blank'
             rel='noopener noreferrer'
             color='teal.500'
